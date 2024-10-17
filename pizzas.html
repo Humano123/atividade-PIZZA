@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://humano123.github.io/styleCSAJ/style.css">
+    <title>Pizzaria</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: chocolate;
+        }
+
+        .pizza {
+            width: 100px;
+            height: 100px;
+        }
+
+        .seção {
+            background-color: white;
+            width: 325px;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 5px 5px 5px 5px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .seção:hover {
+            cursor: pointer;
+            scale: 0.99;
+            box-shadow: 2px 2px 2px 2px;
+        }
+
+        .seção:active {
+            cursor: progress;
+            scale: 0.95;
+            box-shadow: none;
+        }
+
+        .til {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            text-align: center;
+        }
+
+        .Non {
+            text-decoration: none;
+            color: black;
+        }
+        #fundo{
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            height: 100px;
+            width: 100px;
+            text-align: center;
+            box-shadow: 2px 2px 2px 2px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            border: 0;
+            color: black;
+            font-size: x-large;
+        }
+        #fundo:hover{
+            cursor: pointer;
+            scale: 0.99;
+            box-shadow: 0.5px 0.5px 0.5px 0.5px;
+        }
+        #fundo:active{
+            cursor: progress;
+            scale: 0.95;
+            box-shadow: none;
+        }
+        .PizzaI{
+            background-image: url(https://www.dmilano.com.br/wp-content/uploads/2017/04/pizza-1-1.png);
+        }
+        .PizzaII{
+            background-image: url(https://i0.wp.com/centralblogs.com.br/wp-content/uploads/2019/03/pizza-png-fundo-transparente-imagem9-1.png?w=696&ssl=1);
+        }
+        .PizzaIII{
+            background-image: url(https://png.pngtree.com/png-clipart/20231019/original/pngtree-pizza-png-with-ai-generated-png-image_13357740.png);
+        }
+        legend{
+            text-align: center;
+        }
+        fieldset{
+            text-align: center;
+            height: 150px;
+        }
+        .di{
+            display: flex;
+        }
+        .remover{
+            display: none;
+            background-color: rgb(255, 0, 0);
+            text-align: center;
+            box-shadow: 2px 2px 2px 2px black;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            color: white;
+            border: 0;
+            
+        }
+
+        .remover:hover{
+            cursor: pointer;
+            scale: 0.99;
+            box-shadow: 0.5px 0.5px 0.5px 0.5px black;
+        }
+
+        .remover:active{
+            cursor: progress;
+            scale: 0.95;
+            box-shadow: none;
+        }
+        .lista{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateX(-50%) translateY(10%);
+            
+        }
+        h1{
+            z-index: 2;
+        }
+        #Pedir ,#Ctz{
+            display: none;
+            margin: 100px;
+            background-color: rgb(60, 255, 0);
+            text-align: center;
+            box-shadow: 2px 2px 2px 2px black;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            color: rgb(0, 0, 0);
+            border: 0;
+            transform: scale(2);
+        }
+        #Pedir:hover ,#Ctz:hover{
+            cursor: pointer;
+            scale: 0.94;
+            box-shadow: 0.5px 0.5px 0.5px 0.5px black;
+        }
+        #Pedir:active ,#Ctz:Active{
+            cursor: progress;
+            scale: 0.85;
+            box-shadow: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="til">Pizzaria</h1>
+    <fieldset>
+        <legend>Pizzas</legend>
+        <button id="fundo" class="PizzaI" onclick="AdicionarPizza1()">calabresa</button>
+        <button id="fundo" class="PizzaII" onclick="AdicionarPizza2()">mussarela</button>
+        <button id="fundo" class="PizzaIII" onclick="AdicionarPizza3()">tomate</button>
+    </fieldset>
+    <section id="Papel" class="lista">
+        <div class="di"><h1 id="Lista">-</h1>  <button class="remover" id="Remover1" onclick="RemoverPizza1()">Remover pizza</button></div>
+        <div class="di"><h1 id="Lista2">-</h1> <button class="remover" id="Remover2" onclick="RemoverPizza2()">Remover pizza</button></div>
+        <div class="di"><h1 id="Lista3">-</h1> <button class="remover" id="Remover3" onclick="RemoverPizza3()">Remover pizza</button></div>
+        <button id="Pedir" onclick="Pedir()">Pedir</button>
+        <button id="Ctz" onclick="Ok()">Certeza?</button>
+    </section>
+    <script>
+        let pizza1 = "Calabresa";
+        let pizza2 = "Mussarela";
+        let pizza3 = "Tomate";
+        let n = "-";
+        let num = 0;
+
+        function AdicionarPizza1() {
+            document.getElementById("Lista").innerHTML = pizza1;
+            Remover1.style.display = "block";
+            num++;
+            verificarPedir();
+            verificarLimite();
+        }
+
+        function AdicionarPizza2() {
+            document.getElementById("Lista2").innerHTML = pizza2;
+            Remover2.style.display = "block";
+            num++;
+            verificarPedir();
+            verificarLimite();
+        }
+
+        function AdicionarPizza3() {
+            document.getElementById("Lista3").innerHTML = pizza3;
+            Remover3.style.display = "block";
+            num++;
+            verificarPedir();
+            verificarLimite();
+        }
+
+        function RemoverPizza1() {
+            document.getElementById("Lista").innerHTML = n;
+            Remover1.style.display = "none";
+            num--;
+            verificarPedir();
+        }
+
+        function RemoverPizza2() {
+            document.getElementById("Lista2").innerHTML = n;
+            Remover2.style.display = "none";
+            num--;
+            verificarPedir();
+        }
+
+        function RemoverPizza3() {
+            document.getElementById("Lista3").innerHTML = n;
+            Remover3.style.display = "none";
+            num--;
+            verificarPedir();
+        }
+
+        function verificarPedir() {
+            if (num > 0) {
+                document.getElementById("Pedir").style.display = "block";
+            } else {
+                document.getElementById("Pedir").style.display = "none";
+            }
+        }
+
+        function verificarLimite() {
+            if (num >= 4) {
+                console.log("Erro");
+                num = 0;
+                document.getElementById("Lista").innerHTML = n;
+                document.getElementById("Lista2").innerHTML = n;
+                document.getElementById("Lista3").innerHTML = n;
+                Remover1.style.display = "none";
+                Remover2.style.display = "none";
+                Remover3.style.display = "none";
+                verificarPedir();
+            }
+        }
+
+        function Pedir() {
+            document.getElementById("Pedir").style.display = "none";
+            Ctz.style.display = "block";
+        }
+
+        function Ok() {
+            alert("Sua pizza está no caminho!");
+            document.getElementById("Pedir").style.display = "block";
+            Ctz.style.display = "none";
+            document.getElementById("Lista").innerHTML = n;
+            document.getElementById("Lista2").innerHTML = n;
+            document.getElementById("Lista3").innerHTML = n;
+            Remover1.style.display = "none";
+            Remover2.style.display = "none";
+            Remover3.style.display = "none";
+            num = 0;
+        }
+    </script>
+</body>
+
+</html>
